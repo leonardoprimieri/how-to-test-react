@@ -6,6 +6,14 @@ import { ProductsContainer } from "./components/page-container";
 export function ProductsPage() {
   const getProductsQuery = useGetProducts();
 
+  if (getProductsQuery.isError) {
+    return (
+      <ProductsContainer>
+        There was an error fetching the products.
+      </ProductsContainer>
+    );
+  }
+
   if (getProductsQuery.isLoading) {
     return (
       <ProductsContainer>
@@ -17,11 +25,7 @@ export function ProductsPage() {
   }
 
   if (!getProductsQuery.data?.length) {
-    return (
-      <ProductsContainer>
-        <p>No products found</p>
-      </ProductsContainer>
-    );
+    return <ProductsContainer>No products found</ProductsContainer>;
   }
 
   return (
