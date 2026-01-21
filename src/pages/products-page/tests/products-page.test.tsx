@@ -2,8 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { ProductsPage } from "../products-page";
 import { TestWrapper } from "@/test/test-wrapper";
-import { server } from "@/setupTests";
-import { http, HttpResponse } from "msw";
+import { interceptRoute } from "@/test/helpers/intercept-route";
 
 describe("Products Page", () => {
   function makeSut() {
@@ -35,11 +34,11 @@ describe("Products Page", () => {
   });
 
   it("should render empty message if api returns an empty array", async () => {
-    server.use(
-      http.get("https://fakestoreapi.com/products", () => {
-        return HttpResponse.json([]);
-      })
-    );
+    interceptRoute({
+      method: "get",
+      url: "https://fakestoreapi.com/products",
+      response: [],
+    });
 
     makeSut();
 
@@ -49,11 +48,12 @@ describe("Products Page", () => {
   });
 
   it("should render error if api returns an error", async () => {
-    server.use(
-      http.get("https://fakestoreapi.com/products", () =>
-        HttpResponse.json({ message: "Internal Server Error" }, { status: 500 })
-      )
-    );
+    interceptRoute({
+      method: "get",
+      url: "https://fakestoreapi.com/products",
+      response: { message: "Internal Server Error" },
+      status: 500,
+    });
 
     makeSut();
 

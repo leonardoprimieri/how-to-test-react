@@ -1,6 +1,6 @@
 import type { GetProductsResponse } from "@/pages/products-page/types/get-products-response";
 
-export const mockProducts: GetProductsResponse[] = [
+export const productsMock: GetProductsResponse[] = [
   {
     id: 1,
     title: "Casual T-Shirt",
