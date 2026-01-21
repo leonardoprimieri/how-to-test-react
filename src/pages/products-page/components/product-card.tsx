@@ -16,7 +16,7 @@ export function ProductCard({ product }: ProductCardProps) {
         />
       </div>
 
-      <Badge className="mb-3 w-fit bg-blue-500/20 text-blue-400 border-transparent hover:bg-blue-500/30">
+      <Badge className="mb-3 w-fit bg-sky-500/20 text-sky-400 border-transparent hover:bg-sky-500/30">
         {product.category}
       </Badge>
 
@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </span>
       </div>
 
-      <div className="text-2xl font-bold text-blue-500">
+      <div className="text-2xl font-bold text-sky-500">
         ${product.price.toFixed(2)}
       </div>
     </div>

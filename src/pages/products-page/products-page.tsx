@@ -2,9 +2,15 @@ import { useGetProducts } from "./hooks/use-get-products";
 import { ProductCard } from "./components/product-card";
 import { ProductCardSkeleton } from "./components/product-card-skeleton";
 import { ProductsContainer } from "./components/page-container";
+import { ProductCategorySelector } from "./components/product-category-selector/product-category-selector";
+import { useSearchParams } from "react-router";
 
 export function ProductsPage() {
-  const getProductsQuery = useGetProducts();
+  const [searchParams] = useSearchParams();
+
+  const selectedCategory = searchParams.get("category");
+
+  const getProductsQuery = useGetProducts({ category: selectedCategory });
 
   if (getProductsQuery.isError) {
     return (
@@ -16,11 +22,15 @@ export function ProductsPage() {
 
   if (getProductsQuery.isLoading) {
     return (
-      <ProductsContainer>
-        {Array.from({ length: 8 }).map((_, index) => (
-          <ProductCardSkeleton key={index} />
-        ))}
-      </ProductsContainer>
+      <div className="flex flex-col">
+        <h1 className="text-5xl font-semibold my-2">Products</h1>
+        <ProductCategorySelector />
+        <ProductsContainer>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <ProductCardSkeleton key={index} />
+          ))}
+        </ProductsContainer>
+      </div>
     );
   }
 
@@ -29,10 +39,14 @@ export function ProductsPage() {
   }
 
   return (
-    <ProductsContainer>
-      {getProductsQuery?.data?.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </ProductsContainer>
+    <div className="flex flex-col">
+      <h1 className="text-5xl font-semibold my-2">Products</h1>
+      <ProductCategorySelector />
+      <ProductsContainer>
+        {getProductsQuery?.data?.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </ProductsContainer>
+    </div>
   );
 }

@@ -14,10 +14,10 @@ describe("Products Page", () => {
     );
   }
 
-  it("should render the page title", () => {
+  it("should render the page title", async () => {
     makeSut();
-    const heading = screen.getByRole("heading", { name: /products/i });
-    expect(heading).toBeDefined();
+    const heading = await screen.findByRole("heading", { name: "Products" });
+    expect(heading).toBeInTheDocument();
   });
 
   it("should render skeleton if the products are loading", async () => {

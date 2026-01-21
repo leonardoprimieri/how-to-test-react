@@ -2,9 +2,7 @@ import type { ReactNode } from "react";
 
 export function ProductsContainer({ children }: { children: ReactNode }) {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <h1 className="text-4xl font-bold mb-8">Products</h1>
-
+    <div className="container mt-12">
       {typeof children === "string" ? (
         <p className="text-center">{children}</p>
       ) : (
