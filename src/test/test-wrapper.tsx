@@ -10,9 +10,15 @@ const queryClient = new QueryClient({
   },
 });
 
-export function TestWrapper({ children }: { children: ReactNode }) {
+export function TestWrapper({
+  children,
+  route = "/",
+}: {
+  children: ReactNode;
+  route?: string;
+}) {
   return (
-    <MemoryRouter>
+    <MemoryRouter initialEntries={[route]}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </MemoryRouter>
   );

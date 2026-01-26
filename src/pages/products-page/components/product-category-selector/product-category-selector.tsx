@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button/button";
 import { useGetCategories } from "./hooks/use-get-categories";
 import { useNavigate, useSearchParams } from "react-router";
-import { cn } from "@/lib/utils";
 
 export function ProductCategorySelector() {
   const navigate = useNavigate();
@@ -33,11 +32,10 @@ export function ProductCategorySelector() {
         return (
           <Button
             variant="secondary"
-            className={cn({
-              "border-b-2 border-sky-400 rounded-none": isSelected,
-            })}
+            className="data-selected:border-b-2 data-selected:border-sky-400 data-selected:rounded-none"
             onClick={() => onSelectCategory(category)}
             key={index}
+            data-selected={isSelected ? "true" : undefined}
           >
             {category}
           </Button>

@@ -1,0 +1,18 @@
+
+
+ DEV  v4.0.17 /Users/leonardomerloprimieri/Documents/developmen
+ DEV  v4.0.17 /Users/leonardomerloprimieri/Documents/development/personal/react/how-to-test-react
+
+ ✓ src/pages/products-page/components/product-category-selector
+ ✓ src/pages/products-page/components/product-category-selector/product-category.test.tsx (3 tests) 225ms
+ ✓ src/pages/products-page/tests/products-page.test.tsx (5 test
+ ✓ src/pages/products-page/tests/products-page.test.tsx (5 tests) 246ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  13:20:38
+   Duration  1.05s (transform 146ms, setup 324ms, import 273ms,
+   Duration  1.05s (transform 146ms, setup 324ms, import 273ms, tests 471ms, environment 797ms)
+
+ PASS  Waiting for file changes...
+       press h to show help, press q to quit
