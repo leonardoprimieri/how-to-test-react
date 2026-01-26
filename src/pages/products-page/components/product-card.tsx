@@ -1,13 +1,21 @@
 import { Badge } from "@/components/ui/badge";
 import type { GetProductsResponse } from "@/pages/products-page/types/get-products-response";
+import { StarIcon } from "lucide-react";
 
 interface ProductCardProps {
   product: GetProductsResponse;
+  onClick?: () => void;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onClick }: ProductCardProps) {
   return (
-    <div className="border border-white/10 rounded-xl p-6 bg-white/5 transition-all duration-200 cursor-pointer hover:-translate-y-1 hover:shadow-2xl flex flex-col">
+    <div
+      className="border border-white/10 rounded-xl p-6 bg-white/5 transition-all duration-200 cursor-pointer hover:-translate-y-1 hover:shadow-2xl flex flex-col"
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      aria-label={`Open ${product.title} details`}
+    >
       <div className="aspect-square bg-white/10 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
         <img
           src={product.image}
@@ -30,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <div className="flex items-center gap-2 mb-3">
         <div className="flex items-center gap-1">
-          <span className="text-yellow-400">⭐</span>
+          <StarIcon />
           <span className="font-semibold">{product.rating.rate}</span>
         </div>
         <span className="text-sm opacity-50">

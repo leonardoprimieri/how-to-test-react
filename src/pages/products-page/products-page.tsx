@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useGetProducts } from "./hooks/use-get-products";
 import { ProductCard } from "./components/product-card";
 import { ProductCardSkeleton } from "./components/product-card-skeleton";
 import { ProductsContainer } from "./components/page-container";
 import { ProductCategorySelector } from "./components/product-category-selector/product-category-selector";
 import { useSearchParams } from "react-router";
+import { ProductDetailsModal } from "./components/product-details-modal";
 
 export function ProductsPage() {
   const [searchParams] = useSearchParams();
@@ -11,6 +13,7 @@ export function ProductsPage() {
   const selectedCategory = searchParams.get("category");
 
   const getProductsQuery = useGetProducts({ category: selectedCategory });
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   if (getProductsQuery.isError) {
     return (
@@ -44,9 +47,18 @@ export function ProductsPage() {
       <ProductCategorySelector />
       <ProductsContainer>
         {getProductsQuery?.data?.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            onClick={() => setSelectedProduct(product)}
+          />
         ))}
       </ProductsContainer>
+
+      <ProductDetailsModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </div>
   );
 }
