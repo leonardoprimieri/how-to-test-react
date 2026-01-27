@@ -31,7 +31,7 @@ export function ProductCategorySelector() {
         const isSelected = selectedCategory === category;
         return (
           <Button
-            variant={isSelected ? "default" : "secondary"}
+            variant={isSelected ? "secondary" : "outline"}
             onClick={() => onSelectCategory(category)}
             key={index}
             data-selected={isSelected ? "true" : undefined}
