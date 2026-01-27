@@ -20,22 +20,24 @@ export function ProductDetailsModal({
   return (
     <Dialog open={!!product} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="lg:max-w-7xl w-full bg-slate-900/90 backdrop-blur-sm p-6 ring-0">
-        <DialogHeader className="flex items-center justify-between">
+        <DialogHeader className="flex items-center justify-between pb-2">
           <DialogTitle>{product?.title}</DialogTitle>
         </DialogHeader>
 
-        <DialogDescription className="mt-2">
-          <div className="flex gap-4">
-            <div className="w-1/3 aspect-square bg-white/10 rounded-lg flex items-center justify-center overflow-hidden">
+        <DialogDescription className="mt-4 text-slate-300">
+          <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
+            <div className="w-full lg:w-1/2 overflow-hidden rounded-2xl shadow-2xl bg-linear-to-br from-slate-800 via-slate-900 to-slate-950 flex items-center justify-center">
               <img
                 src={product?.image}
                 alt={product?.title}
-                className="w-full h-full object-contain p-4"
+                className="h-96 object-contain"
               />
             </div>
 
-            <div className="flex-1">
-              <p className="text-sm opacity-70 mb-4">{product?.description}</p>
+            <div className="w-full lg:w-1/2 flex flex-col justify-between">
+              <p className="text-sm opacity-80 leading-relaxed mb-4 overflow-y-auto pr-1">
+                {product?.description}
+              </p>
 
               <div className="mb-4">
                 <div className="flex items-center gap-2 mb-2">

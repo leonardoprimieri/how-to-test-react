@@ -25,7 +25,7 @@ export function ProductCategorySelector() {
   if (!categoriesQuery.data?.length) return <></>;
 
   return (
-    <div className="flex w-full flex-wrap gap-1 items-center">
+    <div className="mt-4 flex w-full flex-wrap gap-1 items-center">
       <h2 className="text-sm">Filter by category:</h2>
       {categoriesQuery.data?.map((category, index) => {
         const isSelected = selectedCategory === category;

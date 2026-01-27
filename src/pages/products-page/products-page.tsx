@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { GetProductsResponse } from "./types/get-products-response";
 import { useGetProducts } from "./hooks/use-get-products";
 import { ProductCard } from "./components/product-card";
 import { ProductCardSkeleton } from "./components/product-card-skeleton";
@@ -13,7 +14,7 @@ export function ProductsPage() {
   const selectedCategory = searchParams.get("category");
 
   const getProductsQuery = useGetProducts({ category: selectedCategory });
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState<GetProductsResponse | null>(null);
 
   if (getProductsQuery.isError) {
     return (
