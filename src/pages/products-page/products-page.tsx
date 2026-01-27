@@ -7,6 +7,7 @@ import { ProductsContainer } from "./components/page-container";
 import { ProductCategorySelector } from "./components/product-category-selector/product-category-selector";
 import { useSearchParams } from "react-router";
 import { ProductDetailsModal } from "./components/product-details-modal";
+import { AddProductModal } from "./components/add-product-modal/add-product-modal";
 
 export function ProductsPage() {
   const [searchParams] = useSearchParams();
@@ -14,7 +15,8 @@ export function ProductsPage() {
   const selectedCategory = searchParams.get("category");
 
   const getProductsQuery = useGetProducts({ category: selectedCategory });
-  const [selectedProduct, setSelectedProduct] = useState<GetProductsResponse | null>(null);
+  const [selectedProduct, setSelectedProduct] =
+    useState<GetProductsResponse | null>(null);
 
   if (getProductsQuery.isError) {
     return (
@@ -43,9 +45,12 @@ export function ProductsPage() {
   }
 
   return (
-    <div className="flex flex-col">
-      <h1 className="text-5xl font-semibold my-2">Products</h1>
+    <div className="flex items-start flex-col">
+      <h1 className="text-5xl font-semibold my-2 self-center">Products</h1>
       <ProductCategorySelector />
+      <div className="mt-4">
+        <AddProductModal />
+      </div>
       <ProductsContainer>
         {getProductsQuery?.data?.map((product) => (
           <ProductCard

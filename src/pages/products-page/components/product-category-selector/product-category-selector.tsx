@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/components/ui/button";
 import { useGetCategories } from "./hooks/use-get-categories";
 import { useNavigate, useSearchParams } from "react-router";
 
@@ -25,14 +25,13 @@ export function ProductCategorySelector() {
   if (!categoriesQuery.data?.length) return <></>;
 
   return (
-    <div className="mt-4 flex w-full flex-wrap gap-1 items-center">
+    <div className="mt-4 flex w-full flex-wrap gap-3 items-center">
       <h2 className="text-sm">Filter by category:</h2>
       {categoriesQuery.data?.map((category, index) => {
         const isSelected = selectedCategory === category;
         return (
           <Button
-            variant="secondary"
-            className="data-selected:border-b-2 data-selected:border-sky-400 data-selected:rounded-none"
+            variant={isSelected ? "default" : "secondary"}
             onClick={() => onSelectCategory(category)}
             key={index}
             data-selected={isSelected ? "true" : undefined}
@@ -41,7 +40,11 @@ export function ProductCategorySelector() {
           </Button>
         );
       })}
-      {!!selectedCategory && <Button onClick={onClearCategory}>Clear</Button>}
+      {!!selectedCategory && (
+        <Button variant="destructive" onClick={onClearCategory}>
+          Clear
+        </Button>
+      )}
     </div>
   );
 }

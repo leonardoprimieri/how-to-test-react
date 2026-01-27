@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { GetProductsResponse } from "@/pages/products-page/types/get-products-response";
 
 interface ProductCardProps {
@@ -8,32 +9,27 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onClick }: ProductCardProps) {
   return (
-    <div
-      className="border border-white/10 rounded-xl p-6 bg-white/5 transition-all duration-200 cursor-pointer hover:-translate-y-1 hover:shadow-2xl flex flex-col"
-      role="button"
-      tabIndex={0}
-      onClick={onClick}
-      aria-label={`Open ${product.title} details`}
-    >
-      <div className="aspect-square bg-white/10 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-        <img
-          src={product.image}
-          alt={product.title}
-          className="w-full h-full object-contain p-4"
-        />
-      </div>
+    <Card onClick={onClick} aria-label={`Open ${product.title} details`}>
+      <CardContent>
+        <div className="aspect-square bg-white/10 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="w-full h-full object-contain p-4"
+          />
+        </div>
 
-      <Badge className="mb-3 mx-auto w-fit bg-sky-500/20 text-sky-400 border-transparent hover:bg-sky-500/30">
-        {product.category}
-      </Badge>
+        <Badge className="mb-3 mx-auto w-fit bg-sky-500/20 text-sky-400 border-transparent hover:bg-sky-500/30">
+          {product.category}
+        </Badge>
 
-      <h3 className="text-lg font-semibold mb-2 line-clamp-2 min-h-[2.8rem] leading-snug">
-        {product.title}
-      </h3>
-
-      <div className="text-2xl font-bold text-sky-500">
-        ${product.price.toFixed(2)}
-      </div>
-    </div>
+        <h3 className="text-lg font-semibold line-clamp-2">{product.title}</h3>
+      </CardContent>
+      <CardFooter>
+        <div className="text-2xl font-bold text-sky-500">
+          ${product.price.toFixed(2)}
+        </div>
+      </CardFooter>
+    </Card>
   );
 }

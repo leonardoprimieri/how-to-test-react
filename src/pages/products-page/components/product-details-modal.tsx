@@ -19,12 +19,12 @@ export function ProductDetailsModal({
 }: ProductDetailsModalProps) {
   return (
     <Dialog open={!!product} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="lg:max-w-7xl w-full bg-slate-900/90 backdrop-blur-sm p-6 ring-0">
-        <DialogHeader className="flex items-center justify-between pb-2">
+      <DialogContent className="max-w-5xl">
+        <DialogHeader>
           <DialogTitle>{product?.title}</DialogTitle>
         </DialogHeader>
 
-        <DialogDescription className="mt-4 text-slate-300">
+        <DialogDescription>
           <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
             <div className="w-full lg:w-1/2 overflow-hidden rounded-2xl shadow-2xl bg-linear-to-br from-slate-800 via-slate-900 to-slate-950 flex items-center justify-center">
               <img
