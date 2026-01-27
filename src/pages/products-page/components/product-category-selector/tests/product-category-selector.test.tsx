@@ -1,9 +1,9 @@
 import { TestWrapper } from "@/test/test-wrapper";
 import { afterEach, describe, expect, it } from "vitest";
-import { ProductCategorySelector } from "./product-category-selector";
+import { ProductCategorySelector } from "../product-category-selector";
 import { screen, waitFor } from "@testing-library/dom";
 import { render } from "@testing-library/react";
-import { categoriesMock } from "../../tests/mocks/categories.mock";
+import { categoriesMock } from "../../../tests/mocks/categories.mock";
 import { interceptRoute } from "@/test/helpers/intercept-route";
 import { makeApiEndpoint } from "@/config/api";
 import { QueryClient } from "@tanstack/react-query";

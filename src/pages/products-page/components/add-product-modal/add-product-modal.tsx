@@ -26,11 +26,11 @@ export function AddProductModal() {
     resolver: zodResolver(addProductValidationSchema),
     mode: "onSubmit",
     defaultValues: {
-      category: "testt",
-      description: "testt",
-      image: "https://test.com",
-      price: "300",
-      title: "testt",
+      category: "",
+      description: "",
+      image: "",
+      price: "",
+      title: "",
     },
   });
 
@@ -39,10 +39,10 @@ export function AddProductModal() {
   async function onSubmit(data: ProductFormValues) {
     await addProductMutation.mutateAsync(data, {
       onSuccess: () => {
-        onClose();
         toast.success("Product successfully created", {
           position: "top-center",
         });
+        onClose();
       },
       onError: () => {
         toast.error("Error while creating the product", {
@@ -74,37 +74,39 @@ export function AddProductModal() {
               className="flex flex-col gap-4"
             >
               <ControlledInput<ProductFormValues>
-                label="Product Name"
+                label="Name"
                 name="title"
                 placeholder="Type here..."
               />
               <ControlledInput<ProductFormValues>
-                label="Product Description"
+                label="Description"
                 name="description"
                 placeholder="Type here..."
               />
               <ControlledInput<ProductFormValues>
-                label="Product Category"
+                label="Category"
                 name="category"
                 placeholder="Type here..."
               />
               <ControlledInput<ProductFormValues>
-                label="Product Image URL"
+                label="Image URL"
                 name="image"
                 placeholder="Type here..."
               />
               <ControlledInput<ProductFormValues>
-                label="Product Price"
+                label="Price"
                 name="price"
                 placeholder="Type here..."
                 type="number"
               />
               <DialogFooter className="gap-2">
-                <Button onClick={onClose} variant="destructive">
+                <Button type="button" onClick={onClose} variant="destructive">
                   Cancel
                 </Button>
                 <Button
-                  disabled={form.formState.isSubmitting}
+                  disabled={
+                    form.formState.isSubmitting || !form.formState.isValid
+                  }
                   type="submit"
                   className="lg:w-32"
                 >
