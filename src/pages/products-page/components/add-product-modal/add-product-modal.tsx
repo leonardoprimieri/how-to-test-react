@@ -17,6 +17,7 @@ import {
 } from "./validation/add-product-validation-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function AddProductModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,11 +26,11 @@ export function AddProductModal() {
     resolver: zodResolver(addProductValidationSchema),
     mode: "onSubmit",
     defaultValues: {
-      category: "",
-      description: "",
-      image: "https://",
-      price: "",
-      title: "",
+      category: "testt",
+      description: "testt",
+      image: "https://test.com",
+      price: "300",
+      title: "testt",
     },
   });
 
@@ -37,7 +38,17 @@ export function AddProductModal() {
 
   async function onSubmit(data: ProductFormValues) {
     await addProductMutation.mutateAsync(data, {
-      onSuccess: onClose,
+      onSuccess: () => {
+        onClose();
+        toast.success("Product successfully created", {
+          position: "top-center",
+        });
+      },
+      onError: () => {
+        toast.error("Error while creating the product", {
+          position: "top-center",
+        });
+      },
     });
   }
 
@@ -88,14 +99,14 @@ export function AddProductModal() {
                 placeholder="Type here..."
                 type="number"
               />
-              <DialogFooter>
+              <DialogFooter className="gap-2">
                 <Button onClick={onClose} variant="destructive">
                   Cancel
                 </Button>
                 <Button
                   disabled={form.formState.isSubmitting}
                   type="submit"
-                  className="w-32"
+                  className="lg:w-32"
                 >
                   {form.formState.isSubmitting ? "Saving..." : "Save"}
                 </Button>

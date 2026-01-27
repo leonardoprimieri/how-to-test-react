@@ -15,6 +15,10 @@ async function addProduct(body: ProductBody) {
     body: JSON.stringify(body),
   });
 
+  if (!response.ok) {
+    throw new Error("Error while creating the product");
+  }
+
   return response;
 }
 
